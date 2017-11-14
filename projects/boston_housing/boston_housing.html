@@ -11887,23 +11887,23 @@ Name: MEDV, dtype: float64
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[21]:</div>
+<div class="prompt input_prompt">In&nbsp;[152]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython2"><pre><span></span><span class="c1"># TODO: Minimum price of the data</span>
-<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+<span class="n">minimum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Maximum price of the data</span>
-<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">max</span><span class="p">()</span>
+<span class="n">maximum_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Mean price of the data</span>
-<span class="n">mean_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+<span class="n">mean_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Median price of the data</span>
-<span class="n">median_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">median</span><span class="p">()</span>
+<span class="n">median_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">median</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># TODO: Standard deviation of prices of the data</span>
-<span class="n">std_price</span> <span class="o">=</span> <span class="n">prices</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">std_price</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">prices</span><span class="p">)</span>
 
 <span class="c1"># Show the calculated statistics</span>
 <span class="k">print</span> <span class="s2">&quot;Statistics for Boston housing dataset:</span><span class="se">\n</span><span class="s2">&quot;</span>
@@ -11924,13 +11924,16 @@ Name: MEDV, dtype: float64
 
 <div class="output_area"><div class="prompt"></div>
 <div class="output_subarea output_stream output_stdout output_text">
-<pre>Statistics for Boston housing dataset:
+<pre>The slowest run took 6.40 times longer than the fastest. This could mean that an intermediate result is being cached.
+10000 loops, best of 3: 107 µs per loop
+10000 loops, best of 3: 97.1 µs per loop
+Statistics for Boston housing dataset:
 
 Minimum price: $105,000.00
 Maximum price: $1,024,800.00
 Mean price: $454,342.94
 Median price $438,900.00
-Standard deviation of prices: $165,340.28
+Standard deviation of prices: $165,171.13
 </pre>
 </div>
 </div>
@@ -14000,7 +14003,7 @@ max_depth 10 is high variance- this is evident from a depth of about 6 onwards w
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-6 but 5 might be good enough - beyond 6 the validation score deteriorates whilst the training score continues to improve. With depth &lt;= 4 the model is clearly underfitting as both the validation and trainig scores are still imporoving. Although there is divergence between the scores from 5 onwards the best vaildation score is achieved with a depth of 6 so I would probably recommend that value.</p>
+6 but 5 might be good enough - beyond 6 the validation score deteriorates whilst the training score continues to improve. With depth &lt;= 4 the model is clearly underfitting as both the validation and training scores are still imporoving. Although there is divergence between the scores from 5 onwards the best vaildation score is achieved with a depth of 6 so I would probably recommend that value.</p>
 
 </div>
 </div>
@@ -14036,7 +14039,7 @@ max_depth 10 is high variance- this is evident from a depth of about 6 onwards w
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-a grid search is using a grid created from a range of values across each parameter to do a methodical search of possible values. It can be used to optimize an algorithm from a family of models by attempting to find the best set of parameters from those models testing the model represented by the parameter values at each of the grid points and comparing the test statistic at each of those points (for a test and training set)</p>
+a grid search is using a grid created from a range of values across each hyperparameter to do a methodical search of possible values. It can be used to optimize an algorithm from a family of models by attempting to find the best set of hyperparameters from those models testing the model represented by the hyperparameter values at each of the grid points and comparing the test statistic at each of those points (for a test and training set).</p>
 
 </div>
 </div>
@@ -14064,7 +14067,9 @@ a grid search is using a grid created from a range of values across each paramet
 <div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
 <p><strong>Answer: </strong>
-K-fold cross validation is a technique which involves partitioning the training/cross-validation a number of different ways in order to allow you to train and cross-vaildate many different models. This is useful when using the grid-search method as it allows for many different points on the grid.</p>
+K-fold cross validation is a technique which involves partitioning the training/cross-validation a number of different ways which effectively creates a large number of different training and test sets.</p>
+<p>This means that you aren't having to "throw away" some data when you do the training/test split as all the points get used in some of the training runs and some of the validation runs.</p>
+<p>After the set of different models has been run the results are averaged to get the final model.xs</p>
 
 </div>
 </div>
